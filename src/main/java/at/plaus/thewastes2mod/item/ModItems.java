@@ -15,6 +15,9 @@ public class ModItems {
     public static final RegistryObject<Item> SCRAP = ITEMS.register("scrap",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.THEWASTES2_Tab)));
 
+    public static final RegistryObject<Item> TEST_CAR = ITEMS.register("test_car",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.THEWASTES2_Tab)));
+
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
     }
