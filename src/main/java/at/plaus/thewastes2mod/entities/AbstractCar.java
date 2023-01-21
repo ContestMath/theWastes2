@@ -4,11 +4,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,13 +19,13 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 
 public abstract class AbstractCar extends LivingEntity {
-    public static float speed;
-    public static float rotSpeed;
+    public float speed;
+    public float rotSpeed;
+    public int maxHealth;
 
 
     public AbstractCar(EntityType<? extends LivingEntity> entity, Level level) {
         super(entity, level);
-        this.setCustomNameVisible(false);
     }
 
     private final NonNullList<ItemStack> armorItems = NonNullList.withSize(4, ItemStack.EMPTY);
@@ -56,16 +58,33 @@ public abstract class AbstractCar extends LivingEntity {
     }
 
     @Override
+    public boolean hurt(DamageSource source, float damage) {
+        if (damage < this.getHealth()) {
+            return false;
+        }
+        return super.hurt(source, damage);
+    }
+
+    @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         doPlayerRide(player);
         return InteractionResult.sidedSuccess(this.level.isClientSide);
     }
 
-    public static AttributeSupplier.Builder getAttribues() {
-        return  AbstractHorse.createBaseHorseAttributes()
+
+    public static AttributeSupplier.Builder createStandartVehicleAttributes() {
+        return  AbstractHorse.createMobAttributes()
                 .add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1)
+                .add(Attributes.JUMP_STRENGTH)
+                .add(Attributes.MAX_HEALTH, 20.0D)
+                .add(Attributes.MOVEMENT_SPEED, (double)0.225F)
                 ;
+    }
+
+    @Override
+    public void setCustomNameVisible(boolean p_20341_) {
+        super.setCustomNameVisible(false);
     }
 
     @Override
