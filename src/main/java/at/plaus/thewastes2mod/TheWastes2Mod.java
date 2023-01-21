@@ -1,7 +1,9 @@
 package at.plaus.thewastes2mod;
 
+import at.plaus.thewastes2mod.entities.EntityInit;
 import at.plaus.thewastes2mod.item.ModCreativeModeTab;
 import at.plaus.thewastes2mod.item.ModItems;
+import at.plaus.thewastes2mod.network.ModMessages;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,6 +26,7 @@ public class TheWastes2Mod
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        EntityInit.ENTITIES.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -35,6 +38,7 @@ public class TheWastes2Mod
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
         LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+        ModMessages.register();
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
