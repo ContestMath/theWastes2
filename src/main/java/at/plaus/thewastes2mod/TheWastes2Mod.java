@@ -15,6 +15,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
 
 @Mod(TheWastes2Mod.MODID)
 public class TheWastes2Mod
@@ -31,6 +32,8 @@ public class TheWastes2Mod
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        GeckoLib.initialize();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

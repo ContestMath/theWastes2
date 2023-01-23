@@ -5,10 +5,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -49,13 +46,20 @@ public abstract class AbstractCar extends LivingEntity {
         return HumanoidArm.RIGHT;
     }
 
-    protected void doPlayerRide(Player p_30634_) {
+    public void doPlayerRide(Player player) {
         if (!this.level.isClientSide) {
-            p_30634_.setYRot(this.getYRot());
-            p_30634_.setXRot(this.getXRot());
-            p_30634_.startRiding(this);
+            player.setYRot(this.getYRot());
+            player.setXRot(this.getXRot());
+            player.startRiding(this);
         }
     }
+
+    @Override
+    public void positionRider(Entity entity) {
+        positionThisRider(entity, Entity::setPos);
+    }
+
+    public abstract void positionThisRider(Entity entity, Entity.MoveFunction moveFunction);
 
     @Override
     public boolean hurt(DamageSource source, float damage) {

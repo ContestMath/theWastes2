@@ -12,4 +12,8 @@ public class EntityInit {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, TheWastes2Mod.MODID);
 
     public static final RegistryObject<EntityType<TestCar>> Test = ENTITIES.register("test", () -> EntityType.Builder.of(TestCar::new, MobCategory.CREATURE).build(TheWastes2Mod.MODID + "testcar"));
+
+    public static final RegistryObject<EntityType<Roadrunner>> ROADRUNNER = ENTITIES.register("roadrunner", () -> EntityType.Builder.of(Roadrunner::new, MobCategory.CREATURE).build(TheWastes2Mod.MODID + "roadrunner"));
+
+
 }
