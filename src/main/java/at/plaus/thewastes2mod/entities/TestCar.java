@@ -17,16 +17,15 @@ public class TestCar extends AbstractCar {
     }
 
     @Override
-    public void positionThisRider(Entity entity, MoveFunction moveFunction) {
-        if (this.hasPassenger(entity)) {
-            double d0 = this.getY() + this.getPassengersRidingOffset() + entity.getMyRidingOffset();
-            moveFunction.accept(entity, this.getX(), d0, this.getZ());
-        }
+    public double[] getRiderOffset() {
+        return new double[]{0, 0, 0};
     }
+
 
     public static AttributeSupplier.Builder getAttribues() {
         return createStandartVehicleAttributes()
                 .add(Attributes.MAX_HEALTH, 8)
                 ;
     }
+
 }

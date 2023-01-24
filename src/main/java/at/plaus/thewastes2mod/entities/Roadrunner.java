@@ -31,6 +31,15 @@ public class Roadrunner extends AbstractCar implements IAnimatable {
         this.maxHealth = 10;
     }
 
+    @Override
+    public double[] getRiderOffset() {
+        return new double[]{
+                0.775,
+                -0.6,
+                0.5
+        };
+    }
+
 
     public static AttributeSupplier.Builder getAttribues() {
         return createStandartVehicleAttributes()
@@ -38,22 +47,19 @@ public class Roadrunner extends AbstractCar implements IAnimatable {
                 ;
     }
 
-    public void positionThisRider(Entity entity, Entity.MoveFunction moveFunction) {
-        if (this.hasPassenger(entity)) {
-            double d0 = this.getY() + this.getPassengersRidingOffset() + entity.getMyRidingOffset();
-            moveFunction.accept(entity, this.getX() , d0, this.getZ());
-        }
-    }
-
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+
+        AnimationBuilder drive = new AnimationBuilder().addAnimation("animation.roadrunner.drive", ILoopType.EDefaultLoopTypes.LOOP);
+        AnimationBuilder wipe = new AnimationBuilder().addAnimation("animation.roadrunner.wipers", ILoopType.EDefaultLoopTypes.LOOP);
+
+
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.roadrunner.drive", ILoopType.EDefaultLoopTypes.LOOP));
+            event.getController().setAnimation(drive);
+        } else {
+            drive.clearAnimations();
+            event.getController().setAnimation(drive);
         }
-        assert Minecraft.getInstance().level != null;
-        if (Minecraft.getInstance().level.isRaining()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.roadrunner.wipers", ILoopType.EDefaultLoopTypes.LOOP));
-        }
-        //event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.bat.fly", ILoopType.EDefaultLoopTypes.LOOP));
+
         return PlayState.CONTINUE;
     }
 

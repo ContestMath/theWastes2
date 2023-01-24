@@ -1,7 +1,10 @@
 package at.plaus.thewastes2mod.entities;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.commands.arguments.MessageArgument;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.ChatSender;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,6 +15,7 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 
@@ -48,18 +52,33 @@ public abstract class AbstractCar extends LivingEntity {
 
     public void doPlayerRide(Player player) {
         if (!this.level.isClientSide) {
-            player.setYRot(this.getYRot());
-            player.setXRot(this.getXRot());
             player.startRiding(this);
         }
     }
 
-    @Override
-    public void positionRider(Entity entity) {
-        positionThisRider(entity, Entity::setPos);
+    public void positionRider(Entity entity, Entity.MoveFunction moveFunction, double xOffset, double yOffset, double zOffset) {
+        if (this.hasPassenger(entity)) {
+            double d0 = this.getY() + this.getPassengersRidingOffset() + entity.getMyRidingOffset();
+            //double rot2 = 0;
+            //Vec3 rotVec = this.getForward().normalize();
+            //Vec3 baseLook = new Vec3(1, 0,0);
+            //double rot = rotVec.dot(baseLook);
+            //rot2 = Math.acos(rot);
+            Vec3 offset = new Vec3(xOffset, yOffset, zOffset);
+            Vec3 pos = new Vec3(this.getX() , d0 , this.getZ() );
+            //Vec3 diffVec = baseLook.add(offset.scale(-1));
+            Vec3 result = pos.add(offset.yRot((float) -this.getYRot()/360*2*((float)Math.PI)));
+            //entity.sendSystemMessage(Component.literal(Double.toString(this.getYRot()/360*2*Math.PI)));
+            moveFunction.accept(entity, result.x, result.y, result.z);
+        }
     }
 
-    public abstract void positionThisRider(Entity entity, Entity.MoveFunction moveFunction);
+    public abstract double[] getRiderOffset();
+
+    @Override
+    public void positionRider(Entity entity) {
+        positionRider(entity, Entity::setPos, getRiderOffset()[0], getRiderOffset()[1], getRiderOffset()[2]);
+    }
 
     @Override
     public boolean hurt(DamageSource source, float damage) {
@@ -95,11 +114,9 @@ public abstract class AbstractCar extends LivingEntity {
     public void travel(Vec3 vector) {
         Vec3 deltaMovementVector = new Vec3(0, 0, 0);
         Vec3 sight = this.getLookAngle();
-        sight.dot(new Vec3(1, 0, 1));
-        sight.normalize();
 
-        if(this.hasExactlyOnePlayerPassenger() && Minecraft.getInstance().options.keyUp.isDown()) {
-            deltaMovementVector = sight;
+        if(this.hasExactlyOnePlayerPassenger()) {
+            if (Minecraft.getInstance().options.keyUp.isDown()) {deltaMovementVector = sight;}
             if (Minecraft.getInstance().options.keyLeft.isDown()) {
                 this.setYRot(this.getYRot()-rotSpeed);
                 deltaMovementVector.scale(Math.cos(rotSpeed/360f*Math.PI*2));
