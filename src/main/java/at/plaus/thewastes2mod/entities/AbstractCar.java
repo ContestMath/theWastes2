@@ -1,10 +1,7 @@
 package at.plaus.thewastes2mod.entities;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.commands.arguments.MessageArgument;
 import net.minecraft.core.NonNullList;
-import net.minecraft.network.chat.ChatSender;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -15,7 +12,6 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 
@@ -59,16 +55,9 @@ public abstract class AbstractCar extends LivingEntity {
     public void positionRider(Entity entity, Entity.MoveFunction moveFunction, double xOffset, double yOffset, double zOffset) {
         if (this.hasPassenger(entity)) {
             double d0 = this.getY() + this.getPassengersRidingOffset() + entity.getMyRidingOffset();
-            //double rot2 = 0;
-            //Vec3 rotVec = this.getForward().normalize();
-            //Vec3 baseLook = new Vec3(1, 0,0);
-            //double rot = rotVec.dot(baseLook);
-            //rot2 = Math.acos(rot);
             Vec3 offset = new Vec3(xOffset, yOffset, zOffset);
             Vec3 pos = new Vec3(this.getX() , d0 , this.getZ() );
-            //Vec3 diffVec = baseLook.add(offset.scale(-1));
             Vec3 result = pos.add(offset.yRot((float) -this.getYRot()/360*2*((float)Math.PI)));
-            //entity.sendSystemMessage(Component.literal(Double.toString(this.getYRot()/360*2*Math.PI)));
             moveFunction.accept(entity, result.x, result.y, result.z);
         }
     }
@@ -100,7 +89,7 @@ public abstract class AbstractCar extends LivingEntity {
         return  AbstractHorse.createMobAttributes()
                 .add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1)
                 .add(Attributes.JUMP_STRENGTH)
-                .add(Attributes.MAX_HEALTH, 20.0D)
+                .add(Attributes.MAX_HEALTH, 20)
                 .add(Attributes.MOVEMENT_SPEED, (double)0.225F)
                 ;
     }
@@ -108,6 +97,9 @@ public abstract class AbstractCar extends LivingEntity {
     @Override
     public void setCustomNameVisible(boolean p_20341_) {
         super.setCustomNameVisible(false);
+    }
+    private int getThisMaxHealth() {
+        return maxHealth;
     }
 
     @Override

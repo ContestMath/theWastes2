@@ -1,0 +1,135 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.war_rig.drive": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"body_main": {
+					"rotation": {
+						"0.0": {
+							"post": [0, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.28": {
+							"post": [0.2, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.44": {
+							"post": [0.5, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.6": {
+							"post": [-0.1, 0, -0.3],
+							"lerp_mode": "catmullrom"
+						},
+						"0.72": {
+							"post": [-0.1, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"1.0": {
+							"post": [0, 0, 0],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				},
+				"front_right": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"1.0": [720, 0, 0]
+					}
+				},
+				"front_left": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"1.0": [720, 0, 0]
+					}
+				},
+				"speedometer1": {
+					"rotation": {
+						"0.0": [0, 0, -127.5],
+						"0.16": [0, 0, -120],
+						"0.32": [0, 0, -127.5],
+						"0.44": [0, 0, -125],
+						"0.56": [0, 0, -132.5],
+						"0.64": [0, 0, -130],
+						"0.76": [0, 0, -137.5],
+						"0.8": [0, 0, -132.5],
+						"0.88": [0, 0, -135],
+						"1.0": [0, 0, -132.5]
+					}
+				},
+				"speedometer2": {
+					"rotation": {
+						"0.0": [0, 0, -87.5],
+						"0.24": [0, 0, -82.5],
+						"0.4": [0, 0, -90],
+						"0.56": [0, 0, -82.5],
+						"0.72": [0, 0, -85],
+						"0.88": [0, 0, -82.5],
+						"1.0": [0, 0, -85]
+					}
+				},
+				"axel": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"1.0": [0, 0, -375]
+					}
+				},
+				"backwheel_main": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"1.0": [720, 0, 0]
+					}
+				},
+				"backwheel_main2": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"1.0": [720, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.steering_turn": {
+			"loop": true,
+			"bones": {
+				"steer_wheel": {
+					"rotation": [0, 0, "Math.max(-30, Math.min(30,query.yaw_speed * 0.2)) * -query.modified_move_speed * 6"]
+				},
+				"body_main": {
+					"rotation": [0, 0, "Math.max(-1.5, Math.min(1.5,query.yaw_speed * 0.2)) * query.modified_move_speed * 1"]
+				},
+				"front_right": {
+					"rotation": [0, "Math.max(-20, Math.min(20,query.yaw_speed * 0.3))", 0]
+				},
+				"front_left": {
+					"rotation": [0, "Math.max(-20, Math.min(20,query.yaw_speed * 0.3))", 0]
+				}
+			}
+		},
+		"animation.war_rig.wipers": {
+			"loop": true,
+			"animation_length": 0.6,
+			"bones": {
+				"wiper1": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.3": [4.4914, 0.77729, 59.22446],
+						"0.6": [0, 0, 0]
+					}
+				},
+				"wiper2": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.3": [4.4914, 0.77729, 59.22446],
+						"0.6": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.war_rig.idle": {
+			"loop": true
+		}
+	},
+	"geckolib_format_version": 2
+}
