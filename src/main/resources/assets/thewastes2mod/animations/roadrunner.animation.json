@@ -180,6 +180,9 @@
 					}
 				}
 			}
+		},
+		"animation.roadrunner.idle": {
+			"loop": true
 		}
 	},
 	"geckolib_format_version": 2

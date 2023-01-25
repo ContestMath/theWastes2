@@ -47,25 +47,32 @@ public class Roadrunner extends AbstractCar implements IAnimatable {
                 ;
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(
+                new AnimationController<Roadrunner>(this, "controller", 0, this::drivePredicate));
+        data.addAnimationController(
+                new AnimationController<Roadrunner>(this, "controller1", 0, this::wipePredicate));
+    }
 
-        AnimationBuilder drive = new AnimationBuilder().addAnimation("animation.roadrunner.drive", ILoopType.EDefaultLoopTypes.LOOP);
-        AnimationBuilder wipe = new AnimationBuilder().addAnimation("animation.roadrunner.wipers", ILoopType.EDefaultLoopTypes.LOOP);
 
-
-        if (event.isMoving()) {
-            event.getController().setAnimation(drive);
+    private <E extends IAnimatable> PlayState drivePredicate(AnimationEvent<E> event) {
+        if (event.isMoving() && this.getFirstPassenger() != null) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.roadrunner.drive", ILoopType.EDefaultLoopTypes.LOOP));
         } else {
-            drive.clearAnimations();
-            event.getController().setAnimation(drive);
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.roadrunner.idle", ILoopType.EDefaultLoopTypes.LOOP));
         }
-
         return PlayState.CONTINUE;
     }
 
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<Roadrunner>(this, "controller", 0, this::predicate));
+    private <E extends IAnimatable> PlayState wipePredicate(AnimationEvent<E> event) {
+        assert Minecraft.getInstance().level != null;
+        if (Minecraft.getInstance().level.isRaining()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.roadrunner.wipers", ILoopType.EDefaultLoopTypes.LOOP));
+        } else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.roadrunner.idle", ILoopType.EDefaultLoopTypes.LOOP));
+        }
+        return PlayState.CONTINUE;
     }
 
     @Override
