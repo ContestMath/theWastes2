@@ -6,7 +6,6 @@ import at.plaus.thewastes2mod.client.renderer.RoadrunnerRenderer;
 import at.plaus.thewastes2mod.client.renderer.TestCarRenderer;
 import at.plaus.thewastes2mod.client.renderer.WarRigRenderer;
 import at.plaus.thewastes2mod.entities.EntityInit;
-import at.plaus.thewastes2mod.entities.cars.WarRig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

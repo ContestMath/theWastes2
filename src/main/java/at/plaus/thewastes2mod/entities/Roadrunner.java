@@ -3,6 +3,7 @@ package at.plaus.thewastes2mod.entities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
@@ -21,7 +22,7 @@ public class Roadrunner extends AbstractCar implements IAnimatable {
 
     private AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
-    public Roadrunner(EntityType<? extends LivingEntity> entity, Level level) {
+    public Roadrunner(EntityType<? extends Mob> entity, Level level) {
         super(entity, level);
         this.noCulling = true;
         this.speed = 0.4f;
@@ -32,9 +33,9 @@ public class Roadrunner extends AbstractCar implements IAnimatable {
     @Override
     public double[] getRiderOffset() {
         return new double[]{
-                0.775,
-                -0.6,
-                0.5
+                0.89 /2*1.6,
+                -1.2/2*1.6,
+                0.49 /2*1.6
         };
     }
 

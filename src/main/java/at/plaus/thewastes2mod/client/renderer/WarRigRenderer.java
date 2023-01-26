@@ -1,9 +1,7 @@
 package at.plaus.thewastes2mod.client.renderer;
 
-import at.plaus.thewastes2mod.client.models.RoadrunnerModel;
 import at.plaus.thewastes2mod.client.models.WarRigModel;
-import at.plaus.thewastes2mod.entities.Roadrunner;
-import at.plaus.thewastes2mod.entities.cars.WarRig;
+import at.plaus.thewastes2mod.entities.WarRig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -20,7 +18,7 @@ public class WarRigRenderer extends GeoEntityRenderer<WarRig> {
 
     @Override
     public RenderType getRenderType(WarRig animatable, float partialTick, PoseStack poseStack, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, ResourceLocation texture) {
-        float scaler = 2f;
+        float scaler = 1.8f;
         poseStack.scale(scaler, scaler, scaler);
         return super.getRenderType(animatable, partialTick, poseStack, bufferSource, buffer, packedLight, texture);
     }

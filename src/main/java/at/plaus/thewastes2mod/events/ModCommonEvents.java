@@ -3,7 +3,7 @@ package at.plaus.thewastes2mod.events;
 import at.plaus.thewastes2mod.TheWastes2Mod;
 import at.plaus.thewastes2mod.entities.EntityInit;
 import at.plaus.thewastes2mod.entities.Roadrunner;
-import at.plaus.thewastes2mod.entities.cars.TestCar;
+import at.plaus.thewastes2mod.entities.TestCar;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

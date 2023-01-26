@@ -1,5 +1,6 @@
 package at.plaus.thewastes2mod;
 
+import at.plaus.thewastes2mod.block.BlockInit;
 import at.plaus.thewastes2mod.entities.EntityInit;
 import at.plaus.thewastes2mod.item.ModCreativeModeTab;
 import at.plaus.thewastes2mod.item.ModItems;
@@ -28,6 +29,7 @@ public class TheWastes2Mod
 
         ModItems.register(modEventBus);
         EntityInit.ENTITIES.register(modEventBus);
+        BlockInit.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 

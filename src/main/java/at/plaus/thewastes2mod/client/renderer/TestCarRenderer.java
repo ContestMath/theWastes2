@@ -2,7 +2,7 @@ package at.plaus.thewastes2mod.client.renderer;
 
 import at.plaus.thewastes2mod.TheWastes2Mod;
 import at.plaus.thewastes2mod.client.models.TestCarModel;
-import at.plaus.thewastes2mod.entities.cars.TestCar;
+import at.plaus.thewastes2mod.entities.TestCar;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;

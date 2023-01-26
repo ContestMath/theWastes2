@@ -15,13 +15,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 
-public abstract class AbstractCar extends LivingEntity {
+public abstract class AbstractCar extends Mob {
     public float speed;
     public float rotSpeed;
     public int maxHealth;
 
 
-    public AbstractCar(EntityType<? extends LivingEntity> entity, Level level) {
+    public AbstractCar(EntityType<? extends Mob> entity, Level level) {
         super(entity, level);
     }
 
@@ -31,6 +31,7 @@ public abstract class AbstractCar extends LivingEntity {
         return this.armorItems;
     }
 
+    /*
     @Override
     public ItemStack getItemBySlot(EquipmentSlot slot) {
         return this.armorItems.get(slot.getIndex());
@@ -45,6 +46,8 @@ public abstract class AbstractCar extends LivingEntity {
     public HumanoidArm getMainArm() {
         return HumanoidArm.RIGHT;
     }
+
+     */
 
     public void doPlayerRide(Player player) {
         if (!this.level.isClientSide) {
@@ -71,14 +74,16 @@ public abstract class AbstractCar extends LivingEntity {
 
     @Override
     public boolean hurt(DamageSource source, float damage) {
+        /*
         if (damage < this.getHealth()) {
             return false;
         }
+         */
         return super.hurt(source, damage);
     }
 
     @Override
-    public InteractionResult interact(Player player, InteractionHand hand) {
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         doPlayerRide(player);
         return InteractionResult.sidedSuccess(this.level.isClientSide);

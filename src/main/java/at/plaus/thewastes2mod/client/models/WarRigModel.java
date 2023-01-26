@@ -1,8 +1,7 @@
 package at.plaus.thewastes2mod.client.models;
 
 import at.plaus.thewastes2mod.TheWastes2Mod;
-import at.plaus.thewastes2mod.entities.Roadrunner;
-import at.plaus.thewastes2mod.entities.cars.WarRig;
+import at.plaus.thewastes2mod.entities.WarRig;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 

@@ -18,7 +18,7 @@ public class RoadrunnerRenderer extends GeoEntityRenderer<Roadrunner> {
 
     @Override
     public RenderType getRenderType(Roadrunner animatable, float partialTick, PoseStack poseStack, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, ResourceLocation texture) {
-        float scaler = 2f;
+        float scaler = 1.6f;
         poseStack.scale(scaler, scaler, scaler);
         return super.getRenderType(animatable, partialTick, poseStack, bufferSource, buffer, packedLight, texture);
     }

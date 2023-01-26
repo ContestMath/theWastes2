@@ -1,10 +1,9 @@
-package at.plaus.thewastes2mod.entities.cars;
+package at.plaus.thewastes2mod.entities;
 
-import at.plaus.thewastes2mod.entities.AbstractCar;
-import at.plaus.thewastes2mod.entities.Roadrunner;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -24,7 +23,7 @@ public class WarRig extends AbstractCar implements IAnimatable {
 
     private AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
-    public WarRig(EntityType<? extends LivingEntity> entity, Level level) {
+    public WarRig(EntityType<? extends Mob> entity, Level level) {
         super(entity, level);
         this.noCulling = true;
         this.speed = 0.2f;
@@ -35,11 +34,12 @@ public class WarRig extends AbstractCar implements IAnimatable {
     @Override
     public double[] getRiderOffset() {
         return new double[]{
-                0.675,
-                0.3,
-                1.1
+                0.685 /2*1.8,
+                0.3/2*1.8,
+                1.1 /2*1.8
         };
     }
+
 
     public static AttributeSupplier.Builder createStandartVehicleAttributes() {
         return  AbstractHorse.createMobAttributes()

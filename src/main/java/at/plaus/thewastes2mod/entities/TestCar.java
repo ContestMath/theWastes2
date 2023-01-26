@@ -1,4 +1,4 @@
-package at.plaus.thewastes2mod.entities.cars;
+package at.plaus.thewastes2mod.entities;
 
 import at.plaus.thewastes2mod.entities.AbstractCar;
 import net.minecraft.world.entity.*;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 
 public class TestCar extends AbstractCar {
 
-    public TestCar(EntityType<? extends LivingEntity> entity, Level level) {
+    public TestCar(EntityType<? extends Mob> entity, Level level) {
         super(entity, level);
         this.speed = 0.25f;
         this.rotSpeed = 4f;
