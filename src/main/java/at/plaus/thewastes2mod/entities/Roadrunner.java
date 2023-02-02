@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -49,6 +50,33 @@ public class Roadrunner extends AbstractCar implements IAnimatable, MenuProvider
                 -2.0,
                 0.49 /2*1.6
         };
+    }
+
+
+    @Override
+    public boolean isPushable() {
+        return false;
+    }
+
+
+    @Override
+    public void push(double pX, double pY, double pZ) {
+
+    }
+
+    @Override
+    public boolean ignoreExplosion() {
+        return true;
+    }
+
+    @Override
+    public boolean isInvulnerable() {
+        return true;
+    }
+
+    @Override
+    public boolean isInvulnerableTo(DamageSource p_20122_) {
+        return true;
     }
 
     @Override
