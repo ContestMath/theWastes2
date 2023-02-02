@@ -12,9 +12,8 @@ public class TestCar extends AbstractCar {
 
     public TestCar(EntityType<? extends Mob> entity, Level level) {
         super(entity, level);
-        this.speed = 0.25f;
+        this.acceleration = 0.25f;
         this.rotSpeed = 4f;
-        this.maxHealth = 8;
     }
 
     @Override

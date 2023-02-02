@@ -26,9 +26,9 @@ public class WarRig extends AbstractCar implements IAnimatable {
     public WarRig(EntityType<? extends Mob> entity, Level level) {
         super(entity, level);
         this.noCulling = true;
-        this.speed = 0.2f;
-        this.rotSpeed = 1f;
-        this.maxHealth = 40;
+        this.acceleration = 0.01f;
+        this.rotSpeed = 1.2f;
+        this.weight = 2f;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class WarRig extends AbstractCar implements IAnimatable {
     public static AttributeSupplier.Builder createStandartVehicleAttributes() {
         return  AbstractHorse.createMobAttributes()
                 .add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1)
-                .add(Attributes.MAX_HEALTH, 20)
+                .add(Attributes.MAX_HEALTH, 5000)
                 ;
     }
 

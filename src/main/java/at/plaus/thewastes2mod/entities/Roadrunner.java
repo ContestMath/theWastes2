@@ -1,9 +1,10 @@
 package at.plaus.thewastes2mod.entities;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
@@ -20,14 +21,14 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class Roadrunner extends AbstractCar implements IAnimatable {
 
-    private AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     public Roadrunner(EntityType<? extends Mob> entity, Level level) {
         super(entity, level);
         this.noCulling = true;
-        this.speed = 0.4f;
+        this.acceleration = 0.015f;
         this.rotSpeed = 2f;
-        this.maxHealth = 10;
+        this.weight = 0.01f;
     }
 
     @Override
@@ -42,16 +43,16 @@ public class Roadrunner extends AbstractCar implements IAnimatable {
 
     public static AttributeSupplier.Builder getAttribues() {
         return createStandartVehicleAttributes()
-                .add(Attributes.MAX_HEALTH, 8)
+                .add(Attributes.MAX_HEALTH, 3000)
                 ;
     }
 
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(
-                new AnimationController<Roadrunner>(this, "controller", 0, this::drivePredicate));
+                new AnimationController<>(this, "controller", 0, this::drivePredicate));
         data.addAnimationController(
-                new AnimationController<Roadrunner>(this, "controller1", 0, this::wipePredicate));
+                new AnimationController<>(this, "controller1", 0, this::wipePredicate));
     }
 
 
@@ -77,5 +78,11 @@ public class Roadrunner extends AbstractCar implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose p_21047_) {
+
+        return super.getDimensions(p_21047_);
     }
 }

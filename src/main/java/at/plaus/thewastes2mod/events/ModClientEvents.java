@@ -1,6 +1,7 @@
 package at.plaus.thewastes2mod.events;
 
 import at.plaus.thewastes2mod.TheWastes2Mod;
+import at.plaus.thewastes2mod.client.SpeedometerOverlay;
 import at.plaus.thewastes2mod.client.models.TestCarModel;
 import at.plaus.thewastes2mod.client.renderer.RoadrunnerRenderer;
 import at.plaus.thewastes2mod.client.renderer.TestCarRenderer;
@@ -25,5 +26,14 @@ public class ModClientEvents {
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
        event.registerLayerDefinition(TestCarModel.LAYER_LOCATION, TestCarModel::createBodyLayer);
    }
+   @Mod.EventBusSubscriber(modid = TheWastes2Mod.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ClientModBusEvents {
+       /*
+       @SubscribeEvent
+       public static void registerGuiOverlay(RegisterGuiOverlaysEvent event) {
+           event.registerAboveAll("speed", SpeedometerOverlay.HUD_SPEEDOMETER);
+       }
 
+        */
+   }
 }
