@@ -12,7 +12,9 @@ public class EntityInit {
 
     public static final RegistryObject<EntityType<TestCar>> Test = ENTITIES.register("test", () -> EntityType.Builder.of(TestCar::new, MobCategory.CREATURE).build(TheWastes2Mod.MODID + "testcar"));
 
-    public static final RegistryObject<EntityType<Roadrunner>> ROADRUNNER = ENTITIES.register("roadrunner", () -> EntityType.Builder.of(Roadrunner::new, MobCategory.CREATURE).build(TheWastes2Mod.MODID + "roadrunner"));
+    public static final RegistryObject<EntityType<Roadrunner>> ROADRUNNER = ENTITIES.register("roadrunner", () -> EntityType.Builder.of(Roadrunner::new, MobCategory.CREATURE)
+            .sized(3,3)
+            .build(TheWastes2Mod.MODID + "roadrunner"));
 
     public static final RegistryObject<EntityType<WarRig>> WAR_RIG =
             ENTITIES.register("war_rig",

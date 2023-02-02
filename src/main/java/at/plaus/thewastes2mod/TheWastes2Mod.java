@@ -2,10 +2,12 @@ package at.plaus.thewastes2mod;
 
 import at.plaus.thewastes2mod.block.BlockInit;
 import at.plaus.thewastes2mod.entities.EntityInit;
+import at.plaus.thewastes2mod.gui.menu.ModMenuTypes;
 import at.plaus.thewastes2mod.item.ModCreativeModeTab;
 import at.plaus.thewastes2mod.item.ModItems;
 import at.plaus.thewastes2mod.network.ModMessages;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,8 +32,10 @@ public class TheWastes2Mod
         ModItems.register(modEventBus);
         EntityInit.ENTITIES.register(modEventBus);
         BlockInit.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(ModMenuTypes::menuSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
 
