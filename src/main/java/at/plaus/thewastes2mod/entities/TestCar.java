@@ -4,8 +4,11 @@ import at.plaus.thewastes2mod.entities.AbstractCar;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 
 public class TestCar extends AbstractCar {
@@ -20,6 +23,8 @@ public class TestCar extends AbstractCar {
     public double[] getRiderOffset() {
         return new double[]{0, 0, 0};
     }
+
+
 
 
     public static AttributeSupplier.Builder getAttribues() {

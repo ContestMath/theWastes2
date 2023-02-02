@@ -158,6 +158,5 @@ public abstract class AbstractCar extends Mob {
         return v1.normalize().dot(v2.normalize());
     }
 
-    @Nullable
-    public abstract AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player p_39956_);
+
 }
