@@ -10,11 +10,14 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractCar extends Mob {
     public float acceleration;
@@ -155,4 +158,6 @@ public abstract class AbstractCar extends Mob {
         return v1.normalize().dot(v2.normalize());
     }
 
+    @Nullable
+    public abstract AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player p_39956_);
 }
