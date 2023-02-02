@@ -1,13 +1,26 @@
 package at.plaus.thewastes2mod.entities;
 
+import at.plaus.thewastes2mod.gui.menu.CarMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -21,7 +34,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class Roadrunner extends AbstractCar implements IAnimatable {
 
-    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     public Roadrunner(EntityType<? extends Mob> entity, Level level) {
         super(entity, level);
@@ -43,16 +56,16 @@ public class Roadrunner extends AbstractCar implements IAnimatable {
 
     public static AttributeSupplier.Builder getAttribues() {
         return createStandartVehicleAttributes()
-                .add(Attributes.MAX_HEALTH, 3000)
+                .add(Attributes.MAX_HEALTH, 8)
                 ;
     }
 
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(
-                new AnimationController<>(this, "controller", 0, this::drivePredicate));
+                new AnimationController<Roadrunner>(this, "controller", 0, this::drivePredicate));
         data.addAnimationController(
-                new AnimationController<>(this, "controller1", 0, this::wipePredicate));
+                new AnimationController<Roadrunner>(this, "controller1", 0, this::wipePredicate));
     }
 
 
@@ -75,14 +88,24 @@ public class Roadrunner extends AbstractCar implements IAnimatable {
         return PlayState.CONTINUE;
     }
 
+    private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
+        @Override
+        protected void onContentsChanged(int slot) {
+        }
+    };
+
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
     }
 
+    @Nullable
     @Override
-    public EntityDimensions getDimensions(Pose p_21047_) {
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player p_39956_) {
+        return new CarMenu(pContainerId, pPlayerInventory,this);
+    }
 
-        return super.getDimensions(p_21047_);
+    public IItemHandler getItemStackHandler() {
+        return this.itemHandler;
     }
 }
