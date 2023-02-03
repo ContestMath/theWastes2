@@ -2,7 +2,6 @@ package at.plaus.thewastes2mod.entities;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -30,7 +29,7 @@ public class WarRig extends AbstractCar implements IAnimatable {
     public WarRig(EntityType<? extends Mob> entity, Level level) {
         super(entity, level);
         this.noCulling = true;
-        this.acceleration = 0.01f;
+        this.acceleration = 0.02f;
         this.rotSpeed = 1.2f;
         this.weight = 2f;
     }
@@ -38,9 +37,9 @@ public class WarRig extends AbstractCar implements IAnimatable {
     @Override
     public double[] getRiderOffset() {
         return new double[]{
-                0.685 /2*1.8,
-                0.3/2*1.8,
-                1.1 /2*1.8
+                0.6165,
+                -1.1,
+                0.99
         };
     }
 
@@ -50,6 +49,12 @@ public class WarRig extends AbstractCar implements IAnimatable {
                 .add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1)
                 .add(Attributes.MAX_HEALTH, 5000)
                 ;
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player p_39956_) {
+        return null;
     }
 
 

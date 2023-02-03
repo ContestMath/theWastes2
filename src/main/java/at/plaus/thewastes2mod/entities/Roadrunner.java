@@ -37,8 +37,8 @@ public class Roadrunner extends AbstractCar implements IAnimatable, MenuProvider
         super(entity, level);
         this.noCulling = true;
         this.acceleration = 0.015f;
-        this.rotSpeed = 2f;
-        this.weight = 0.01f;
+        this.rotSpeed = 1.2f;
+        this.weight = 1f;
     }
 
     @Override

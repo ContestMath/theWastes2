@@ -24,6 +24,11 @@ public class TestCar extends AbstractCar {
         return new double[]{0, 0, 0};
     }
 
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player p_39956_) {
+        return null;
+    }
+
 
 
 

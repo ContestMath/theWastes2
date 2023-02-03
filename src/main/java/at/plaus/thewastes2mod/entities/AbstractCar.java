@@ -22,8 +22,9 @@ import org.jetbrains.annotations.Nullable;
 public abstract class AbstractCar extends Mob {
     public float acceleration;
     public float rotSpeed;
-    public float rollFrictionCoefficient = 0.101f;
-    public float glideFrictionCoefficient = rollFrictionCoefficient/1.005f;
+    public float rollFrictionCoefficient = 0.0995f;
+    public float glideFrictionCoefficient = rollFrictionCoefficient/1.03f;
+    //public float driftFrictionCoefficient = rollFrictionCoefficient/1.02f;
     public float weight;
     public Vec3 movementVector = new Vec3(0,0,0);
 
@@ -60,6 +61,11 @@ public abstract class AbstractCar extends Mob {
     @Override
     public boolean hurt(DamageSource source, float damage) {
         return super.hurt(source, damage);
+    }
+
+    @Override
+    public boolean isPushable() {
+        return false;
     }
 
     @Override
@@ -137,7 +143,7 @@ public abstract class AbstractCar extends Mob {
         }
 
         if (Minecraft.getInstance().options.keyDown.isDown() && movementDirection.dot(sight) > 0) {
-            frictionSumm /= 10;
+            frictionSumm /= 1.1;
         }
 
         //Instant halt on low speed does not work
@@ -159,4 +165,6 @@ public abstract class AbstractCar extends Mob {
     }
 
 
+    @Nullable
+    public abstract AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player p_39956_);
 }

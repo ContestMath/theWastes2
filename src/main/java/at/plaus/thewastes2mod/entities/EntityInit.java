@@ -18,6 +18,9 @@ public class EntityInit {
 
     public static final RegistryObject<EntityType<WarRig>> WAR_RIG =
             ENTITIES.register("war_rig",
-                    () -> EntityType.Builder.of(WarRig::new, MobCategory.CREATURE).build(TheWastes2Mod.MODID + "war_rig")
+                    () -> EntityType.Builder.of(WarRig::new, MobCategory.CREATURE)
+                            .sized(3.2f, 3.2f)
+                            .build(TheWastes2Mod.MODID + "war_rig")
+
             );
 }
