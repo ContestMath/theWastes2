@@ -146,12 +146,11 @@ public abstract class AbstractCar extends Mob {
             frictionSumm /= 1.1;
         }
 
-        //Instant halt on low speed does not work
-        if (movementVector.length() < acceleration*1000 && deltaMovementVector == new Vec3(0,0,0)) {
+        if (movementVector.length() < acceleration*1000 && deltaMovementVector.equals(new Vec3(0, 0, 0))) {
             movementVector = new Vec3(0,0,0);
         }
 
-        if (movementVector != new Vec3(0,0,0)) {
+        if (!(movementVector.equals(new Vec3(0,0,0)))) {
             movementVector = movementVector.scale(frictionSumm);
         };
         setDeltaMovement(this.getDeltaMovement().scale(frictionSumm));
